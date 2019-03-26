@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -23,6 +25,11 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //conexão com o Banco
+            services.AddEntityFrameworkNpgsql().AddDbContext<WebApiContext>
+                (options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+
             services.AddMvc();
         }
 
@@ -36,5 +43,6 @@ namespace WebAPI
 
             app.UseMvc();
         }
+        
     }
 }
