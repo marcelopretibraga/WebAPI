@@ -20,11 +20,19 @@ namespace WebAPI.Controllers
         {
             _context = context;
         }
-
+        /// <summary>
+        /// Endpoint que retorna TODAS as pessoas cadastradas
+        /// </summary>
+        /// <returns>Lista de Pessoas</returns>
         // GET: api/Pessoa
         [HttpGet]
         public IEnumerable<Pessoa> GetPessoas() => _context.Pessoas;
 
+        /// <summary>
+        /// Retorna Pessoa por ID
+        /// </summary>
+        /// <param name="id">Identificador únido da Pessoa - Int</param>
+        /// <returns></returns>
         // GET: api/Pessoa/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPessoa([FromRoute] int id)
